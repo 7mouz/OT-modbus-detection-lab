@@ -8,23 +8,18 @@ traffic first, then catch the thing that does not fit.
 
 ## Architecture
 
-```
-      plant.py            Node-RED HMI           attack.py
-     (physics)             (operator)           (attacker)
-         |                     |                     |
-         | writes              | setpoints           | unauthorized
-         | temp/level          | + reads             | write
-         v                     v                     v
-   +--------------------------------------------------------+
-   |     OpenPLC  -  control logic, Modbus server :502       |
-   +--------------------------------------------------------+
-                              |
-                              |  all :502 traffic mirrored to the sensor
-                              v
-               +---------------------------------+
-               |    Zeek + ICSNPP + detect.zeek  |
-               |   passive: writes logs, alerts  |
-               +---------------------------------+
+```mermaid
+flowchart TD
+    plant["plant.py<br/>physics: temperature, level"]
+    plc["OpenPLC<br/>control logic, Modbus server :502"]
+    hmi["Node-RED HMI<br/>operator"]
+    atk["attack.py<br/>attacker on the segment"]
+    zeek["Zeek + ICSNPP + detect.zeek<br/>passive sensor: logs + alerts"]
+
+    plant <-->|reads outputs, writes temp/level| plc
+    hmi <-->|reads values, writes setpoints| plc
+    atk -->|unauthorized setpoint write| plc
+    plc -.->|all :502 traffic mirrored| zeek
 ```
 
 Five parts, one host (everything on 127.0.0.1):
