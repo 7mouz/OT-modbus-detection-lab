@@ -18,7 +18,7 @@ flowchart TD
 
     plant <-->|reads outputs, writes temp/level| plc
     hmi <-->|reads values, writes setpoints| plc
-    atk -->|unauthorized setpoint write| plc
+    atk -.->|unauthorized setpoint write| plc
     plc -.->|all :502 traffic mirrored| zeek
 ```
 
