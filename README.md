@@ -3,8 +3,8 @@
 This is a small OT/ICS lab. A PLC runs a simulated milk pasteurizer, I attack it over
 Modbus, and a passive monitor detects the attack.
 
-I built it to learn OT network monitoring the way it actually works: baseline the normal
-traffic first, then catch the thing that does not fit.
+I built it to learn how OT network monitoring actually works, by baselining the normal
+traffic first and then catching what does not fit.
 
 ## Architecture
 
@@ -136,9 +136,8 @@ broadcast every intermediate value. I changed the slider to send only the final 
 captured clean traffic again, and confirmed zero alerts. Then I ran the same rule on the
 attack and got exactly one alert.
 
-That is the lesson. At the protocol level the attacker's write and a normal operator write
-look identical. You cannot tell them apart from the packet. You can only tell them apart if
-you know what normal looks like first.
+At the protocol level the attacker's write and a normal operator write look identical. The
+only way to tell them apart is to know what normal looks like first.
 
 ## Key concepts
 
