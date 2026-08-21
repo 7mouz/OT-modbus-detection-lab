@@ -1,0 +1,28 @@
+# python virtualenv (machine-specific, thousands of files) - never commit
+.venv/
+__pycache__/
+*.pyc
+
+# private planning notes - keep local, do NOT publish
+BRIEF.md
+HANDOFF.md
+
+# backups / scratch
+*.bak
+*.bak-*
+detection/**/w.zeek
+detection/**/packet_filter.log
+
+# generated build artifacts (regenerated on build)
+plc/tank/build/
+
+# personal notes, not published
+docs/how-zeek-works.md
+
+# build scaffolding, not part of the deliverable
+tools/
+
+# editor lock/junk files
+.~lock.*#
+*.swp
+.DS_Store

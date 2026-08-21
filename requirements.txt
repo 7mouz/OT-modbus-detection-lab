@@ -1,0 +1,2 @@
+# Python deps for process-sim/plant.py and attacker/attack.py
+pymodbus>=3.6
