@@ -18,7 +18,7 @@ coils; IEC `%QW` words map to Modbus holding registers.
 | `Level`         | `%QW1` | 1 | INT | % | **plant**    | milk level in the vat |
 | `TempSetpoint`  | `%QW2` | 2 | INT | C | **operator** | pasteurization target (63) |
 | `LevelSetpoint` | `%QW3` | 3 | INT | % | **operator** | fill-level target |
-| `HeaterPower`   | `%QW4` | 4 | INT | % | **PLC**      | PID heater command 0-100; read by the plant |
+| `HeaterPower`   | `%QW4` | 4 | INT | % | **PLC**      | PI heater command 0-100; read by the plant |
 | `HoldSecs`      | `%QW5` | 5 | INT | s | **PLC**      | elapsed hold seconds 0-30; read by the HMI |
 
 ## Coils (`%QX`, FC1 read / FC5 write)
@@ -44,7 +44,7 @@ coils; IEC `%QW` words map to Modbus holding registers.
 | `TankEmpty`    | BOOL | Level <= 3 (ends the empty phase) |
 | `Cooking`      | BOOL | state latch: heat + hold phase |
 | `Emptying`     | BOOL | state latch: discharge phase |
-| `HeatInhibit`  | BOOL | AlmLowLevel OR NOT Cooking (feeds the PID Inhibit) |
+| `HeatInhibit`  | BOOL | AlmLowLevel OR NOT Cooking (feeds the TempCtrl Inhibit input) |
 | `BelowSP`      | BOOL | Temperature < TempSetpoint (feeds AlmPastTemp) |
 | `LevelLow`, `LevelHigh` | BOOL | pump hysteresis flags |
 | `LevelLowInt`, `LevelHighInt` | INT | pump band, LevelSetpoint -/+ 5 |
@@ -62,8 +62,9 @@ coils; IEC `%QW` words map to Modbus holding registers.
 - **Pump:** `(LevelLow OR Pump) AND NOT LevelHigh AND NOT Emptying` (hysteresis, off while emptying).
 - **Heat:** the `TempCtrl` PI block drives `HeaterPower`, gated by `HeatInhibit`
   (heat only during the cook, plus the dry-fire interlock).
-- **Hold (the CCP):** `HoldTimer` runs while `AtTemp AND Cooking`. It resets if the
-  temperature drops, so the milk must be held continuously. `BatchSafe := HoldTimer.Q`.
+- **Hold (the critical control point):** `HoldTimer` runs while `AtTemp AND Cooking`.
+  It resets if the temperature drops, so the milk must be held continuously.
+  `BatchSafe := HoldTimer.Q`.
 - **Release:** `Discharge := Emptying`; `Divert := NOT BatchSafe` (fail-safe, defaults ON).
 - **Alarms:** `AlmLowLevel` (Level < 20), `AlmHighLevel` (Level > 90),
   `AlmHighTemp` (Temperature > TempHiThr), `AlmPastTemp` (Cooking AND BelowSP).

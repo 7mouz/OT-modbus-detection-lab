@@ -16,7 +16,7 @@ Derived from a live loopback capture of the running pasteurizer lab.
 No FC5 / FC15 (write coils), no FC16 (write multiple registers), nothing else.
 
 ## Clients and their roles (distinguished by TCP source port)
-> On loopback every client is `127.0.0.1`, so we identify them by connection/port,
+> On loopback every client is `127.0.0.1`, so clients are identified by connection/port,
 > not IP. In a real plant these would be separate hosts on the OT segment.
 
 | Src port | Identity | Reads | Writes (FC6) |
@@ -45,4 +45,5 @@ Observed write breakdown (FC6 requests):
 - An **unusual function code** (anything other than 1/3/6).
 - A **new/unexpected TCP connection** to :502 that wasn't in the baseline.
 
-That last set is exactly the "why it was detectable" reasoning for the writeup.
+Those rules are what `detection/detect.zeek` checks. See `docs/running-zeek.md` to
+reproduce it.

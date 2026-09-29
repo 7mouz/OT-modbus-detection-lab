@@ -137,7 +137,7 @@
                 <INT/>
               </type>
               <documentation>
-                <xhtml:p><![CDATA[PID heater command 0-100 percent. Written by the PLC; read by the plant.]]></xhtml:p>
+                <xhtml:p><![CDATA[PI heater command 0-100 percent. Written by the PLC; read by the plant.]]></xhtml:p>
               </documentation>
             </variable>
           </localVars>
@@ -187,7 +187,7 @@
                 <BOOL/>
               </type>
               <documentation>
-                <xhtml:p><![CDATA[Internal: AlmLowLevel OR NOT Cooking. Feeds the PID Inhibit (heat only while cooking).]]></xhtml:p>
+                <xhtml:p><![CDATA[Internal: AlmLowLevel OR NOT Cooking. Feeds the TempCtrl Inhibit (heat only while cooking).]]></xhtml:p>
               </documentation>
             </variable>
             <variable name="BelowSP">
@@ -251,7 +251,7 @@
                 <derived name="TempCtrl"/>
               </type>
               <documentation>
-                <xhtml:p><![CDATA[Instance of the PID temperature-control function block.]]></xhtml:p>
+                <xhtml:p><![CDATA[Instance of the PI temperature-control function block.]]></xhtml:p>
               </documentation>
             </variable>
           </localVars>
@@ -1885,7 +1885,7 @@
             <comment localId="97" height="40" width="540">
               <position x="980" y="1270"/>
               <content>
-                <xhtml:p><![CDATA[I controller with anti-windup - holds 63 C without overshoot.]]></xhtml:p>
+                <xhtml:p><![CDATA[PI controller with anti-windup - holds 63 C without overshoot.]]></xhtml:p>
               </content>
             </comment>
           </LD>

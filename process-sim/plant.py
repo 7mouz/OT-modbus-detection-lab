@@ -23,7 +23,7 @@ HOST, PORT = "127.0.0.1", 502
 # the plant consumes it;  "we write" = the plant is the sensor for it.
 REG_TEMP        = 0   # we write : Temperature  (deg C)
 REG_LEVEL       = 1   # we write : Level        (percent)
-REG_HEATERPOWER = 4   # we read  : PID heater command 0-100 %
+REG_HEATERPOWER = 4   # we read  : PI heater command 0-100 %
 COIL_PUMP       = 1   # we read  : fill pump on/off
 COIL_DISCHARGE  = 8   # we read  : discharge valve (%QX1.0)
 
@@ -31,7 +31,7 @@ COIL_DISCHARGE  = 8   # we read  : discharge valve (%QX1.0)
 AMBIENT, HEAT_RATE, LOSS = 20, 4, 0.05
 FILL_RATE, DRAIN_RATE    = 2, 5          # percent/s: pump fills slow, valve dumps fast
 DT = 0.2                                 # plant tick (s): 5x faster than 1s so the
-                                         # PID (20 ms scan) sees fresh temperature sooner
+                                         # PI controller (20 ms scan) sees fresh temperature sooner
 
 def connect():
     c = ModbusTcpClient(HOST, port=PORT)

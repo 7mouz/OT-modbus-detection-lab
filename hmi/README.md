@@ -1,6 +1,9 @@
 # HMI (Node-RED)
 
-Operator dashboard for the pasteurizer. It polls the PLC over Modbus and renders a P&ID-style mimic of the vat. The mimic shows a shaded vessel, live temperature/level/heat readouts, a BATCH SAFE / DIVERT banner, a pasteurization hold countdown, and an alarm annunciator. Setpoints are written back with two sliders. Built on Dashboard 2.0.
+Operator dashboard for the pasteurizer. It polls the PLC over Modbus and renders a
+P&ID-style mimic of the vat: a shaded vessel, live temperature/level/heat readouts, a
+BATCH SAFE / DIVERT banner, a pasteurization hold countdown, and an alarm annunciator.
+Setpoints are written back with two sliders. Built on Node-RED Dashboard 2.0.
 
 ## Import
 1. Node-RED menu -> Import -> select `flow.json` -> Import.

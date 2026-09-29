@@ -49,7 +49,7 @@ zeek-cut note msg < notice.log
 # -> Pasteurizer::Unsafe_Setpoint  TempSetpoint (reg 2) set to 30 C ... from 127.0.0.1:<port>
 ```
 
-## Live mode (real-time instead of a pcap) -- needs root, like tcpdump
+## Live mode: real-time instead of a pcap (needs root, like tcpdump)
 ```
 sudo /opt/zeek/bin/zeek -C -i lo <repo>/detection/detect.zeek
 ```
@@ -70,9 +70,9 @@ sudo tcpdump -Z root -i lo -w <repo>/captures/<name>.pcap 'tcp port 502'
 
 Zeek's built-in `modbus.log` gives the function code but not the register or value.
 The ICSNPP-Modbus parser (Idaho National Lab / CISA) adds `modbus_detailed.log`, which
-logs the register address and value on every request. Our `detect.zeek` does not need
-it (it reads the register/value straight off the built-in events), but the detailed log
-is a much better forensic view.
+logs the register address and value on every request. The `detect.zeek` script does not
+need it (it reads the register/value straight off the built-in events), but the detailed
+log is a much better forensic view.
 
 Install with Zeek's package manager:
 ```

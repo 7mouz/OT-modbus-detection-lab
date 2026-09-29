@@ -13,7 +13,7 @@ setpoint the vat reaches "at temp", the hold completes, BatchSafe latches, and t
 batch DISCHARGES under-pasteurized milk while the HMI still shows BATCH SAFE.
 
 Assumes the attacker has already mapped the process (stolen tag DB or sniffed the
-HMI traffic) and knows reg 2 = TempSetpoint. See docs/baseline.
+HMI traffic) and knows reg 2 = TempSetpoint. See docs/baseline.md.
 """
 from pymodbus.client import ModbusTcpClient
 import sys
